@@ -31,15 +31,8 @@
             getOldestFemale()
             {
                 let females = this.getAllFemale();
-                let oldest = 0;
-                for(let j=1;j<females.length;j++)
-                {
-                    if(females[oldest].age < females[j].age)
-                    {
-                        oldest = j;
-                    }
-                }
-                return females[oldest];
+                let oldest = this.getOldest(females);
+                return oldest;
             }
             getAllFemale()
             {
@@ -52,6 +45,18 @@
                     }
                 }
                 return females;
+            }
+            getOldest(females)
+            {
+                let oldest = 0;
+                for(let j=1;j<females.length;j++)
+                {
+                    if(females[oldest].age < females[j].age)
+                    {
+                        oldest = j;
+                    }
+                }
+                return females[oldest];
             }
         }
         

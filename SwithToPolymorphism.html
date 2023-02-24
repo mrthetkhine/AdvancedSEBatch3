@@ -1,0 +1,27 @@
+<html>
+    <script>
+        class Employee
+        {
+            calculatePay()
+            {
+                console.log('Calculate Pay');
+            }
+        }
+        class CommisionEmployee extends Employee
+        {
+            calculatePay()
+            {
+                console.log('CommisionEmployee Calculate Pay');
+            }
+        }
+        class SalaryEmployee extends Employee
+        {
+            calculatePay()
+            {
+                console.log('SalaryEmployee Calculate Pay');
+            }
+        }
+        let emp = new CommisionEmployee();
+        emp.calculatePay();
+    </script>
+</html>
