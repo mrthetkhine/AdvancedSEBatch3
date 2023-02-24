@@ -1,0 +1,31 @@
+<html>
+    <script>
+        let arr = [
+            {
+                name : 'TK',
+                gender : 'Male',
+                age : 38,
+            },
+            {
+                name : 'Mya Mya',
+                gender : 'Female',
+                age : 20,
+            },
+            {
+                name : 'Mg Hla',
+                gender : 'Male',
+                age : 13,
+            },
+            {
+                name : 'Phyu Phyu',
+                gender : 'Female',
+                age : 16,
+            },
+        ];
+        const isFemale = (obj)=>obj.gender=='Female';
+        const getMax = (a,b)=> a.age > b.age?a:b;
+        let result = arr.filter(isFemale)
+                         .reduce(getMax);
+        console.log('Result ',result.name);
+    </script>
+</html>
