@@ -1,0 +1,24 @@
+<html>
+    <script>
+        function getSomethingLater(callback)
+        {
+            console.log('Function get called');
+            setTimeout(()=>{
+                console.log('Execute now');
+                //throw new Error('Something bad happen in async code');
+                callback(null,100);
+            },1000);
+        }
+
+        try
+        {
+            getSomethingLater((err,result)=>console.log("Result ",result));
+            //console.log('Result ',result);
+        }
+        catch(e)
+        {
+            console.log('E ',e);
+        }
+        console.log('After catch');
+    </script>
+</html>
