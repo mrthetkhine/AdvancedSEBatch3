@@ -1,0 +1,23 @@
+<html>
+    <script>
+        
+        function push(stack,element)
+        {
+            stack[stack.length] = element;
+        }
+        function pop(stack)
+        {
+            return stack.pop();
+        }
+        let stack1 = [];
+
+        push(stack1,'One');
+        push(stack1,'Two');
+        stack1[0]="Something";
+        stack1.length = 0;
+
+
+        let stack2 = [];
+        console.log("Pop ",pop(stack2));
+    </script>
+</html>
