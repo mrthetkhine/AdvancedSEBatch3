@@ -1,0 +1,44 @@
+<html>
+    <script>
+        
+        let module = (function()
+        {
+            function method1()
+            {
+                console.log('Method 1');
+            }
+            function method2()
+            {
+                console.log('Method 2');
+            }
+            return {
+                method1,
+                method2
+            }
+        }());
+       
+
+        function logWithAOP(obj)
+        {
+            let modified = {};
+            for(let prop in obj)
+            {
+                if(typeof obj[prop] =='function')
+                {
+                    //console.log('Prop ',prop, ' is function');
+                    let oldFun = obj[prop];
+
+                    obj[prop] = function()
+                    {
+                        console.log('Before calling ',prop);
+                        return oldFun.apply(null,arguments);
+                    }
+                }
+            }
+            return obj;
+        }
+        logWithAOP(module); 
+        module.method1();
+        module.method2();
+    </script>
+</html>

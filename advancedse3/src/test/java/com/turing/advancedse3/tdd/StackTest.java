@@ -69,5 +69,75 @@ public class StackTest {
 		});
 		assertEquals(Stack.STACK_OVERFLOW_MESSAGE, exception.getMessage());
 	}
-	
+	@Test
+	public void testPopWhenThereIsOneElement()
+	{
+		int size = stack.size();
+		stack.push(100);
+		
+		int element = stack.pop();
+		
+		assertEquals(100, element);
+		assertEquals(size, stack.size());
+	}
+	@Test
+	public void testPopWhenThereIsMultipleElement()
+	{
+		int size = stack.size();
+		for(int i=1;i<=5;i++)
+		{
+			stack.push(i);
+		}
+		
+		for(int i=5;i >=1; i--)
+		{
+			int element = stack.pop();
+			assertEquals(i, element);
+		}
+		
+		assertEquals(size, stack.size());
+	}
+	@Test
+	public void testPopWhenThereIsFullElement()
+	{
+		int size = stack.size();
+		for(int i=1;i<= Stack.STACK_SIZE;i++)
+		{
+			stack.push(i);
+		}
+		
+		for(int i=Stack.STACK_SIZE;i >=1; i--)
+		{
+			int element = stack.pop();
+			assertEquals(i, element);
+		}
+		
+		assertEquals(size, stack.size());
+	}
+	@Test
+	public void testPopWhenStackIsEmpty()
+	{
+		StackunderflowException exception = assertThrows(StackunderflowException.class, ()->{
+			stack.pop();
+		});
+		assertEquals(Stack.STACK_UNDERFLOW_MESSAGE, exception.getMessage());
+	}
+	@Test
+	@DisplayName("Stack must throw stackunderflow exception when pop is call more than push")
+	public void testPopMoreThanPush()
+	{
+		
+		for(int i=1;i<=5;i++)
+		{
+			stack.push(i);
+		}
+		StackunderflowException exception = assertThrows(StackunderflowException.class, ()->{
+			for(int i=1;i<=5+1;i++)
+			{
+				stack.pop();
+			}
+		});
+		assertEquals(Stack.STACK_UNDERFLOW_MESSAGE, exception.getMessage());
+		
+	}
 }
