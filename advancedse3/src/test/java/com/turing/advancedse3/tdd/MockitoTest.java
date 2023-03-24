@@ -175,7 +175,7 @@ public class MockitoTest {
 		inOrder.verify(mockedList).clear();
 	}
 	@Test
-	void testMockStaticMethod() {
+	public void testMockStaticMethod() {
 	    assertEquals("data",StaticUtil.getData());
 	    
 	    try (MockedStatic<StaticUtil> utilities = Mockito.mockStatic(StaticUtil.class)) {
