@@ -1,0 +1,41 @@
+<html>
+    <body>
+        <div>
+           Name <span id="modelName">Name </span>
+           <br/>
+           Age <span id="modelAge">Age </span>
+        </div>
+    </body>
+    <script>
+        function updateView(model)
+        {
+            document.getElementById("modelName").innerText = model.name;
+            document.getElementById("modelAge").innerText = model.age;
+
+        }
+        let model = {
+            name : "Tk",
+            age : 38,
+        }
+        updateView(model);
+        model.name = "Change";
+        const handler3 = {
+            get(target, prop, receiver) {
+                console.log('Target ',target, ' Prop ',prop, 'Receiver ',receiver);
+                return target[prop];
+            },
+            set(obj, prop, value) 
+            {
+                console.log('Obj ',obj, 'Prop ', prop, 'Value ',value);
+                obj[prop] = value;
+                updateView(obj);
+            }
+        };
+
+        const proxy = new Proxy(model, handler3);
+
+        console.log(proxy.name); // hello
+        proxy.name = "Something";
+        console.log('Proxy ',proxy);
+    </script>
+</html>
