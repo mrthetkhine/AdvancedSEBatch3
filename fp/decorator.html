@@ -1,0 +1,25 @@
+<html>
+    <script>
+        function htmlLogger(logger)
+        {
+            return function(str)
+            {
+                return "<p>"+ logger(str)+"</p>";
+            }
+        }
+        function timeLogger(logger)
+        {
+            return function(str)
+            {
+                return "Time "+ (new Date())+ logger(str)+"";
+            }
+        }
+        
+        function logger(str)
+        {
+            return "Log "+str;
+        }
+        let result = timeLogger(htmlLogger(logger))("hello");
+        console.log('Result ',result);
+    </script>
+</html>
