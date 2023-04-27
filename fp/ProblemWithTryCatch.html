@@ -1,0 +1,22 @@
+<html>
+    <script>
+        function asyncFun()
+        {
+            //console.log('Async started');
+            setTimeout(function()
+            {
+                console.log('Async executed');
+                throw new Error('Eror in aysnc code');
+            },1000);
+        }
+        try
+        {
+            asyncFun();
+        }
+        catch(e)
+        {
+            console.log('Err ',e);
+        }
+        console.log('End');
+    </script>
+</html>

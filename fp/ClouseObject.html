@@ -1,0 +1,27 @@
+<html>
+    <script>
+        function stack()
+        {
+            let items = [];
+            function push(element)
+            {
+                items.push(element);
+            }
+            function pop()
+            {
+                return items.pop();
+            }
+            return {
+                push,
+                pop
+            }
+        }
+
+        let stack1 = stack();
+        stack1.item = [];
+        stack1.push(100);
+        stack1.push(200);
+        console.log('Sack1 ',stack1);
+        console.log('Sack1 ',stack1.pop());
+    </script>
+</html>

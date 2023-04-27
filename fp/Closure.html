@@ -1,0 +1,15 @@
+<html>
+    <script>
+        function uniqueGenerator()
+        {
+           let x = 0;
+           return function inner()
+           {
+                return x++;
+           }
+        }
+        let unique = uniqueGenerator();
+        console.log('Unique ',unique());
+        console.log('Unique ',unique());
+    </script>
+</html>

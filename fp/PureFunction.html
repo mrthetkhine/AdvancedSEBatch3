@@ -1,0 +1,23 @@
+<html>
+    <script>
+        const add = (x,y)=> x + y;
+        console.log('Add ',add(1,3));
+
+        //side effect
+        let globalX = 100;
+        function getGlobal()
+        {
+            return globalX;
+        }
+
+        function updateGlobal()
+        {
+            globalX ++;
+        }
+
+        function getNow()
+        {
+            return new Date();
+        }
+    </script>
+</html>

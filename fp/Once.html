@@ -1,0 +1,51 @@
+<html>
+    <script>
+        /*
+        let doneOrder = false;
+        function order()
+        {
+            if(!doneOrder)
+            {
+                console.log('Order');
+                doneOrder = true;
+            }
+           
+        }
+        order();
+        order();
+
+        function payment()
+        {
+
+        }
+        */
+        function once(fn)
+        {
+            let done = false;
+            return function()
+            {
+                if(!done)
+                {
+                    fn();
+                    done = true;
+                }
+            }
+        }
+        function order()
+        {
+            console.log('Order');
+        }
+        function payment()
+        {
+            console.log('Payment');
+        }
+        order = once(order);
+        payment = once(payment);
+
+        order();
+        order();
+
+        payment();
+        payment();
+    </script>
+</html>
