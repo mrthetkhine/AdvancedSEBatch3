@@ -1,0 +1,77 @@
+<html>
+    <script>
+        let arr = [1,3,-5,12];
+      
+        let sum = (a,b) => {
+            console.log('A ',a, ' B ',b);
+            return a+b;
+        }
+        let total = arr.reduce(sum);
+        console.log('Total ',total);
+
+        let min = (a,b)=> a> b? b : a;
+        let smallest = arr.reduce(min);
+        console.log('Smallest ',smallest);
+
+        let objArr = [
+            {
+                name : 'TK',
+                age : 38,
+                gender : 'male'
+            },
+            {
+                name : 'Hla Hla',
+                age : 20,
+                gender : 'female'
+            },
+            
+            {
+                name : 'Aung Aung',
+                age : 20,
+                gender : 'male'
+            },
+            {
+                name : 'Mya Mya',
+                age : 18,
+                gender : 'female'
+            },
+            
+        ];
+        let group = {};// 
+        /*
+        group['male'] = [obj,obj];
+        */
+       /*
+        for(let i=0;i< objArr.length;i++)
+        {
+            let obj = objArr[i];
+            if(group[obj.gender])
+            {
+                group[obj.gender].push(obj);
+            }
+            else
+            {
+                group[obj.gender] = [obj];
+            }
+        }
+        console.log('Group ',group);
+        */
+       group = objArr.reduce((group,obj)=>{
+        console.log('Group ',group, ' Obj ',obj);
+        /*
+        if(group[obj.gender])
+        {
+            group[obj.gender].push(obj);
+        }
+        else
+        {
+            group[obj.gender] = [obj];
+        }
+        return group;
+        */
+       return group[obj.gender]?(group[obj.gender].push(obj),group )
+                                : ( group[obj.gender] = [obj],group)
+       },{});
+       console.log('Result ',group);
+    </script>
+</html>

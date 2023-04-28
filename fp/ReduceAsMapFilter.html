@@ -1,0 +1,22 @@
+<html>
+    <script>
+        let arr = [10,8,20,30,13,27,21];
+      
+        //reduce map?
+        let double = (x) => x * 2;
+
+        let mapper = (arr,b)=>{
+            console.log('arr ',arr, 'B ',b);
+            return [...arr, double(b)];
+        }
+        let doubleArr = arr.reduce(mapper,[]);
+        console.log('DoubleArr ',doubleArr);
+
+        let gtTen = (x)=> x >10;
+        let filter = (arr,b)=>{
+            return gtTen(b)?[...arr,b]: arr;
+        };
+        let result = arr.reduce(filter,[]);
+        console.log('Result ',result);
+    </script>
+</html>

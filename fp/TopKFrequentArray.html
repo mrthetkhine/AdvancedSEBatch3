@@ -1,0 +1,28 @@
+<html>
+    <script>
+        // 2**3**4
+        let arr = [3,3,1,2,2,3,4,5,3,4,2,1,1,2,2,];
+        let frequency = arr.reduce((group,element)=>{
+            //console.log('Group ',group, ' Element ',element);
+            if(group[element])
+            {
+                group[element]++;
+            }
+            else
+            {
+                group[element] = 1;
+            }
+            return group;
+        },{});
+        
+        console.log('Frequency ',frequency);
+        let frequencyArr = Object.entries(frequency);
+     
+        console.log('FrequencyArr ',frequencyArr);
+        frequencyArr.sort( (a,b)=>{
+            return b[1]-a[1];
+        });
+        console.log('FrequencyArr ',frequencyArr);
+        
+    </script>
+</html>

@@ -1,0 +1,29 @@
+<html>
+    <script>
+       
+       function hello(msg )
+       {
+        console.log('Hello invoked ',msg);
+       }
+       //hello('Hi ');
+       function add(x,y)
+       {
+        return x+y;
+       }
+       const log =(fn)=>{
+        return (...args)=>
+        {
+            console.log(fn.name, 'called with argument',...args );
+            let ret = fn(...args);
+            console.log('Ret ',ret);
+            return ret;
+        }
+       };
+       let f = log(hello);
+       f('Hi','Hello');
+
+       let addWithLog = log(add);
+       let result = addWithLog(10,2);
+       console.log('Result ',result);
+    </script>
+</html>

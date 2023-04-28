@@ -1,0 +1,54 @@
+<html>
+    <script>
+        let arr = [10,20,30,40,15];
+
+        let arr2 = arr.map(ele=> ele * 2);
+        console.log('Arr ',arr);
+        console.log('Arr2 ',arr2);
+
+        let objArr = [
+            {
+                name : 'TK',
+                age : 38,
+                gender : 'male'
+            },
+            {
+                name : 'Hla Hla',
+                age : 20,
+                gender : 'female'
+            },
+            
+            {
+                name : 'Aung Aung',
+                age : 20,
+                gender : 'male'
+            },
+            {
+                name : 'Mya Mya',
+                age : 18,
+                gender : 'female'
+            },
+            
+        ];
+      
+        function not(predFun)
+        {
+            return function(obj)
+            {
+                return !predFun(obj);
+            }
+        }
+        const getName = (obj)=>obj.name;
+        const isFemale = (obj) => obj.gender == 'female';
+        const isMale = not(isFemale);
+        let min = (objA,objB) => objA.age < objB.age ? objA : objB;
+        console.log('isMale ', isMale({ gender:'male'}));
+        let allFemale = objArr.filter(isFemale)
+                              .map(getName);
+        console.log('All Female ',allFemale);
+
+        let youngestFemale = objArr.filter(isFemale)
+                                    .reduce(min);
+        console.log('Youngest female ',youngestFemale);
+    </script>
+</html>

@@ -1,0 +1,38 @@
+<html>
+    <script>
+        // 2**3**4
+        let arr = [3,3,1,2,2,3,4,5,3,4,2,1,1,2,2,];
+        //frequency 1-
+        //sort
+        //extract
+        //{ '3': frequnecy}
+        let frequency = {};
+        for(let item of arr)
+        {
+            if(frequency[item])
+            {
+                frequency[item]++;
+            }
+            else
+            {
+                frequency[item] = 1;
+            }
+        }
+        console.log('Frequency ',frequency);
+        let frequencyArr = Object.entries(frequency);
+        /*
+        for(const [key,value] of Object.entries(frequency))
+        {
+            console.log('Key ',key, " value ",value);
+        }*/
+        console.log('FrequencyArr ',frequencyArr);
+        ;
+        /*
+        a=[ '1',3]
+        */
+        frequencyArr.sort( (a,b)=>{
+            return b[1]-a[1];
+        });
+        console.log('FrequencyArr ',frequencyArr);
+    </script>
+</html>

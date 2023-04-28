@@ -1,0 +1,32 @@
+<html>
+    <script>
+        // 2**3**4
+        let arr = [1,3,[-5,12,[10,20]]];
+        let flatArr = arr.flat(2);
+        console.log('Flatarr ',flatArr);
+      
+        arr = [1,4,-2,5];
+        let result = arr.map(a=>[a,a*2]);
+        console.log('Result ',result);
+       
+        result = arr.flatMap(a=>[a,a*2]);
+        console.log('Result ',result);
+
+        arr.forEach((x)=>console.log(x));
+
+        const isGtZero = (x)=> x > 0;
+        result = arr.every(isGtZero);
+
+        console.log('All is > 0 ',result);
+
+        result = arr.some(isGtZero);
+        console.log('some is > 0 ',result);
+
+        const gtTwo = (x)=> x > 2;
+        result = arr.find(gtTwo);
+        console.log('elemnt >2 ',result);
+
+        let index = arr.findIndex(gtTwo);
+        console.log('Index ',index);
+    </script>
+</html>
