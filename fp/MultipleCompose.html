@@ -1,0 +1,50 @@
+<html>
+    <script>
+       
+       function toUpper(msg)
+       {
+        return msg.toUpperCase();
+       }
+       function appendHi(msg)
+       {
+        return 'hi '+ msg;
+       }
+       console.log('ToUpper ',toUpper('hello'));
+       console.log('AppendHi ',appendHi('hello'));
+
+   
+       /*
+       f,g
+       */
+       function compose(f,g)
+       {
+            return function(x)
+            {
+                return f(g(x));
+            }
+       }
+       const newAppendHiToUpper = compose(
+                                    toUpper,
+                                    appendHi
+                                    );
+       console.log('NewAppendHiToUpper ',newAppendHiToUpper('hello'));
+
+       let addOne = (x) => x + 1;
+       let double = (x) => x * 2;
+       let addTen = (x) => x + 10;
+
+       function composeN(...fns)
+       {
+        console.log('Fns ',fns);
+        return function(x)
+        {
+            return fns.reduceRight((input,fn)=>fn(input),x);
+        }
+       }
+       let formula = composeN(
+                                addTen,
+                                double,
+                                addOne);
+       console.log(formula(3));
+    </script>
+</html>

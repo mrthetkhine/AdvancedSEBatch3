@@ -1,0 +1,32 @@
+<html>
+    <script>
+       
+       
+       function pipe(f,g)
+       {
+            return function(x)
+            {
+                return g(f(x));
+            }
+       }
+   
+
+       let addOne = (x) => x + 1;
+       let double = (x) => x * 2;
+       let addTen = (x) => x + 10;
+
+       function pipeN(...fns)
+       {
+        console.log('Fns ',fns);
+        return function(x)
+        {
+            return fns.reduce((input,fn)=>fn(input),x);
+        }
+       }
+       let formula = pipeN(
+                                addTen,
+                                double,
+                                addOne);
+       console.log(formula(3));
+    </script>
+</html>

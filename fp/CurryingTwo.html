@@ -1,0 +1,17 @@
+<html>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ramda/0.28.0/ramda.js"></script>
+    <script>
+      function push(stack)
+      {
+        return function(element)
+        {
+            stack.push(element);
+            return stack;
+        }
+      }
+
+      let st1 = push([])(10);
+      console.log('St1 ',st1);
+      
+    </script>
+</html>

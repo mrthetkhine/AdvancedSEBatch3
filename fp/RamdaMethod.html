@@ -1,0 +1,31 @@
+<html>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ramda/0.28.0/ramda.js"></script>
+    <script>
+        
+        console.log('Add ',R.add(2)(3));//
+        console.log('Add ',R.add(2,3));
+        const equals3 = R.equals(3);
+        let x = 3;
+        console.log('Equals 3 ',equals3(x));
+        console.log('Equals 3 ',R.all(equals3)([3,3,3]));
+        console.log('Equals 3 ',R.all(equals3)([3,3,2]));
+
+        let obj = {
+            name : "TK",
+            age : 38,
+            gender :"male"
+        };
+        console.log('R.prop("name") ', R.prop('age')(obj));
+        console.log('R.pro ',R.propEq('age',38)(obj));
+
+        const ageEq38 = R.propEq('age',38);
+        const genderIsMale = R.propEq('gender','male');
+        const allPass = R.allPass([ageEq38,genderIsMale])(obj);
+        console.log('All Pass ',allPass);
+
+        const getThree = R.always(3);
+        console.log('GetThree ',getThree());
+
+        console.log('Pick ',R.pick(['name'])(obj));
+    </script>
+</html>

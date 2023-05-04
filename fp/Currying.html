@@ -1,0 +1,27 @@
+<html>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ramda/0.28.0/ramda.js"></script>
+    <script>
+      function add(x,y)//multiple argument
+      {
+        return x+y;
+      }
+      const double = (x)=> x*2;
+      function add2(x)//composable
+      {
+        return function(y)
+        {
+            return x+y;
+        }
+      }
+      let fun = add2(10);
+      console.log('Fun ',fun);
+      console.log('add2(3) ',fun(3));
+
+      let newFun = R.pipe(
+            add2(10),
+            double
+        );
+      console.log('New Func ',newFun(2));
+      
+    </script>
+</html>

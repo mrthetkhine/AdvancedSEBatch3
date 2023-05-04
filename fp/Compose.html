@@ -1,0 +1,35 @@
+<html>
+    <script>
+       
+       function toUpper(msg)
+       {
+        return msg.toUpperCase();
+       }
+       function appendHi(msg)
+       {
+        return 'hi '+ msg;
+       }
+       console.log('ToUpper ',toUpper('hello'));
+       console.log('AppendHi ',appendHi('hello'));
+
+       function toUpperAndAppendHi(msg)
+       {
+        let result = toUpper(msg);
+        return appendHi(result);
+       }
+       console.log('ToUpperAndAppendHi ',toUpperAndAppendHi('hello'));
+
+       /*
+       f,g
+       */
+       function compose(f,g)
+       {
+            return function(x)
+            {
+                return f(g(x));
+            }
+       }
+       const newAppendHiToUpper = compose(toUpper,appendHi);
+       console.log('NewAppendHiToUpper ',newAppendHiToUpper('hello'));
+    </script>
+</html>
