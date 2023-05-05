@@ -1,0 +1,21 @@
+<html>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ramda/0.28.0/ramda.js"></script>
+    <script>
+        //method(par1,par2)
+        //method(par1, par3)
+        //R.prop('name')(obj)
+        let obj = {
+            name: "TK",
+            age : 38,
+        };
+        let animal  = {
+            name : "Somename"
+        };
+        const prop = (propName)=>(obj)=>obj[propName];
+        console.log('Prop ',prop('name')(obj));
+
+        const getName = prop('name');
+        console.log('GetName ',getName(obj));
+        console.log('GetName2 ',getName(animal));
+    </script>
+</html>

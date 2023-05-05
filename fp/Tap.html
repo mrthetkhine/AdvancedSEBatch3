@@ -1,0 +1,22 @@
+<html>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ramda/0.28.0/ramda.js"></script>
+    <script>
+        const toUpper = (str)=>str.toUpperCase();
+        const appendHi = (str) => 'Hi '+ str;
+        
+        const tap = (fn)=>(val)=>(fn(val),val);
+       //const log = tap(console.log);
+        const log = R.tap(console.log);
+        //log('Hello');
+
+        const appendHiAndToUpper = R.pipe(
+                log,
+                appendHi,
+                log,
+                toUpper,
+                log
+                );
+        console.log('Ap ',appendHiAndToUpper('hello'));
+        
+    </script>
+</html>

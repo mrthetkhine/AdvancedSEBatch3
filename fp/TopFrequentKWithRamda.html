@@ -1,0 +1,41 @@
+<html>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ramda/0.28.0/ramda.js"></script>
+    <script>
+        // 2**3**4
+        let k = 2;
+        let arr = [3,3,1,2,2,3,4,5,3,4,2,1,1,2,2,];
+    
+        /*
+        let groupByFrequency = R.countBy(R.identity);
+        let group = groupByFrequency(arr);
+        let countArr = Object.entries(group);
+        console.log('Group ',countArr);
+        
+        const sortByCount = (a,b)=> b[1]-a[1]; 
+        let sort = R.sort(sortByCount);
+        console.log('Sort list ',sort(countArr));
+        const sortedList = sort(countArr);
+
+        const takeTop = R.take(2);
+        const tops = takeTop(sortedList);
+        console.log('Top ',R.map(arr=>arr[0])(tops) );
+        */
+        const sortByCount = (a,b)=> b[1]-a[1]; 
+        const getNumber = arr => arr[0];
+        const log = R.tap(console.log);
+        const topFrequentK = R.pipe(
+            log,
+            R.countBy(R.identity),
+            log,
+            Object.entries,
+            log,
+            R.sort(sortByCount),
+            log,
+            R.take(2),
+            log,
+            R.map(getNumber),
+            log
+       );
+       console.log('Top Frequent k ', topFrequentK(arr));
+    </script>
+</html>

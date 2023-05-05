@@ -1,0 +1,38 @@
+<html>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ramda/0.28.0/ramda.js"></script>
+    <script>
+        //method(par1,par2)
+        //method(par1, par3)
+        //R.prop('name')(obj)
+        let obj = {
+            name: "TK",
+            age : 38,
+            /*
+            address : {
+                city : 'Yangon',
+                township:"Yankin",
+                street : 'Somewhere'
+            }*/
+        };
+        //obj.address.city;
+        console.log('Path ',R.path(['address','city'])(obj));
+
+        /*
+        compose
+        pipe
+        */
+       const addOne = (x) => x + 1;
+       const double = (x) => x * 2;
+       const formula = R.pipe(addOne,double);
+        
+       const identity = (x)=>x; 
+
+       let arr = [1,3,5,7,9];
+       //sum, length div
+       /*
+       div(sum/ length)
+       */
+       const average = R.converge(R.divide, [R.sum, R.length]);
+       console.log('Average ',average(arr));
+    </script>
+</html>
