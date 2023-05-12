@@ -1,0 +1,78 @@
+<html>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ramda/0.28.0/ramda.js"></script>
+    <script>
+        /*
+        let counter = 1;
+        counter ++;
+        */
+        const MayBe = (v)=>({
+            value: v,
+            isNothing:()=> v ===undefined || v ===null,
+            map : function (f){
+                return this.isNothing()?
+                        MayBe.of(v)
+                        :MayBe(f(v));
+            },
+            orElse:function (defaultValue){
+                //console.log('Or else called ',this.isNothing());
+               return this.isNothing()
+                        ?MayBe.of( defaultValue) 
+                        : MayBe.of(v);
+            },
+            valueOf:()=>v
+        });
+        MayBe.of = (v)=> MayBe(v);
+       const Nothing = (value)=>({
+            map(fun){
+                return Nothing(value);
+            },
+            valueOf:()=>value
+       });
+        Nothing.of = Nothing;
+        const Some = (value)=>({
+            value,
+            map(fun){
+                return Some.of(fun(value));
+            },
+            valueOf:()=>value
+        });
+        Some.of = Some;
+        const Either = {
+            Some : Some,
+            Nothing: Nothing
+        };
+
+        let nothing = Nothing.of('Error ')
+                              .map(x=> x.toUpperCase());
+        console.log('Nothing ',nothing+'');
+
+        /*
+        function div(a,b)
+        {
+            if( isNaN(a) || isNaN(b))
+            {
+                return MayBe.of(null);
+            }
+            else{
+                return MayBe.of(a/b);
+            }
+        }
+        let result = div(10,NaN)
+                        .map(x=> x * 2);
+        console.log('Result ',result);
+        */
+        function div(a,b)
+        {
+            if( isNaN(a) || isNaN(b))
+            {
+                return Nothing.of('a or b is null');
+            }
+            else{
+                return Some.of(a/b);
+            }
+        }
+        let result = div(10,NaN)
+                        .map(x=> x * 2);
+        console.log('Result ',result.valueOf());
+    </script>
+</html>

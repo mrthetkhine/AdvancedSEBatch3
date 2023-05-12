@@ -1,0 +1,56 @@
+<html>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ramda/0.28.0/ramda.js"></script>
+    <script>
+        /*
+        let counter = 1;
+        counter ++;
+        */
+       const MayBe = (value,predFun)=>({
+            value,
+            isNothing()
+            {
+                return predFun(value);
+            },
+            map(fn)
+            {
+                return this.isNothing()?
+                            MayBe.of(null,predFun): 
+                            MayBe.of(fn(value),predFun);
+            },
+            orElse(defautlValue)
+            {
+                return this.isNothing()?
+                                MayBe.of(defautlValue,predFun)
+                                :MayBe.of(value,predFun);
+            }
+
+       });
+       MayBe.of = MayBe;
+       
+       const isNullOrUndefined = (x)=> x === null || x === undefined;
+       const appendHi = (msg)=> 'Hi '+msg;
+       const toUpper = (msg)=> msg.toUpperCase();
+
+       
+       const inc = (x) => x+1;
+       const double = (x) => x * 2;
+
+       const pipe = (funA,funB)=>x => funB(funA(x));
+       //const newFun = pipe( toUpper, appendHi);
+       //console.log('New Fun ',newFun(null));
+
+       let str = 'hi';
+       const result = MayBe.of(str,isNullOrUndefined)
+                            .map(toUpper)
+                            .map(appendHi)
+                            .orElse('default value');
+        console.log('Result ',result);
+
+        /*
+        let result2 = MayBe.of(NaN,isNaN)
+                            .map(inc)
+                            .map(double);
+        console.log('Result2 ',result2);
+        */
+    </script>
+</html>

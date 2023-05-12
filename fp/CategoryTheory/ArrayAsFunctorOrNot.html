@@ -1,0 +1,15 @@
+<html>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ramda/0.28.0/ramda.js"></script>
+    <script>
+        let arr = [10,20,30];
+
+        const identity = (x)=>x;
+        const inc = (x)=>x+1;
+        const dobule = (x)=> x *2;
+
+        const pipe = (funA,funB)=> x => funB(funA(x));
+
+        let arr2 = arr.map(identity);
+        console.log('Arr == arr2 ',arr == arr2);
+    </script>
+</html>

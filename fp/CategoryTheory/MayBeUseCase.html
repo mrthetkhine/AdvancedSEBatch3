@@ -1,0 +1,69 @@
+<html>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ramda/0.28.0/ramda.js"></script>
+    <script>
+        /*
+        let counter = 1;
+        counter ++;
+        */
+        const MayBe = (v)=>({
+            value: v,
+            isNothing:()=> v ===undefined || v ===null,
+            map : function (f){
+                return this.isNothing()?
+                        MayBe.of(v)
+                        :MayBe(f(v));
+            },
+            orElse:function (defaultValue){
+                //console.log('Or else called ',this.isNothing());
+               return this.isNothing()
+                        ?MayBe.of( defaultValue) 
+                        : MayBe.of(v);
+            },
+            valueOf:()=>v
+        });
+        MayBe.of = (v)=> MayBe(v);
+       let employess = {
+        employeIds:[1,2,3,4],
+        data :{
+            1:{
+                employeId:1,
+                name : 'Mg Mg',
+            },
+            2:{
+                name : 'Aung Aung',
+                supervisor:1,
+            },
+            3:{
+                name : 'Mg Mya',
+                supervisor:1,
+            },
+            4:{
+                name : 'Hla Mg',
+                supervisor:5
+            }
+        }
+           
+       };
+       function fetchSuperVisor(employeId)
+       {
+        if(employess.employeIds.includes(employeId) )
+        {
+            let employee = employess.data[employeId];
+            if(employee.supervisor)
+            {
+                let supervisor =  employess.data[employee.supervisor];
+                return supervisor;
+            }
+        }
+       }
+       console.log('Fetch supervisor 1',fetchSuperVisor(2));
+       console.log('Fetch supervisor ',fetchSuperVisor(4));
+       const getEmployeeById = (empId) => employess.data[empId];
+       const getSupervisor = (employee) => employess.data[employee.supervisor];
+
+       let supervisor = MayBe.of(-3)
+                             .map(getEmployeeById)
+                             .map(getSupervisor);
+       console.log('Supervisor ',supervisor);                
+    </script>
+</html>

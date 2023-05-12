@@ -1,0 +1,48 @@
+<html>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ramda/0.28.0/ramda.js"></script>
+    <script>
+        /*
+        let counter = 1;
+        counter ++;
+        */
+       const MayBe = (value)=>({
+            value,
+            isNothing()
+            {
+                return value===null || value ===undefined;
+            },
+            map(fn)
+            {
+                return this.isNothing()?
+                            MayBe.of(null): 
+                            MayBe.of(fn(value));
+            }
+       });
+       MayBe.of = MayBe;
+       /*
+       if(null)
+       {
+        return '';
+       }
+       else 
+       {
+
+       }
+       */
+       const appendHi = (msg)=> 'Hi '+msg;
+       const toUpper = (msg)=> msg.toUpperCase();
+
+       const inc = (x) => x+1;
+       const double = (x) => x * 2;
+
+       const pipe = (funA,funB)=>x => funB(funA(x));
+       //const newFun = pipe( toUpper, appendHi);
+       //console.log('New Fun ',newFun(null));
+
+       let str = null;
+       const result = MayBe.of(str)
+                            .map(toUpper)
+                            .map(appendHi);
+        console.log('Result ',result);
+    </script>
+</html>
