@@ -1,0 +1,22 @@
+<html>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ramda/0.28.0/ramda.js"></script>
+    <script>
+        function doSomethingAsync()
+        {
+            setTimeout(()=>{
+                console.log('Code execute');
+                throw new Error('Custom error')
+            },1000);
+        }
+        try
+        {
+            doSomethingAsync();
+            console.log('After async call');
+        }
+        catch(e)
+        {
+            console.log('Error ',e);
+        }
+        console.log('End');
+    </script>
+</html>

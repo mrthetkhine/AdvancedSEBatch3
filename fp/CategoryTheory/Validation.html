@@ -1,0 +1,111 @@
+<html>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ramda/0.28.0/ramda.js"></script>
+    <script>
+        const Container = (value)=>({
+            map(fn) 
+            {
+                return Container.of(fn(value));
+            },
+            ap(c) //Container-value fn
+            {
+                return c.map(value);
+            } ,
+            valueOf()
+            {
+                return value;
+            }
+        });
+        Container.of = Container;
+       
+        let add = (x,y)=>x+y;
+        let obj = {
+            name : 'MTK',
+            age : 101,
+            email : 'someone@gmail.com'
+        }
+        //isEmail
+        //notEmpty
+        //minLength, maxLength
+        //min, max
+
+        const isEmpty = (x)=> (x+'') === '';
+        const not = (fn)=>x=> !fn(x);
+        const notEmpty = not(isEmpty);
+        const isEmail = (email)=> email.includes('@');
+        const isString = (str)=> typeof str === 'string';
+        const isNumber = (num)=> typeof num === 'number';
+
+        const minLength = (len)=>(str)=> isString(str) &&  str.length >= len;
+        const maxLength = (len)=>(str)=> isString(str) && str.length <= len;
+
+        const minValue = (value)=> (x)=> isNumber(x) && x >= value;
+        const maxValue = (value)=> (x)=> isNumber(x) && x <= value;
+
+        function and(...fns)
+        {
+            return function (x)
+            {
+                return fns.reduce((a,fn)=> a && fn(x), true);
+            }
+        }
+        function or(...fns)
+        {
+            return function (x)
+            {
+                return fns.reduce((a,fn)=> a || fn(x), false);
+            }
+        }
+        const minMax = and(minLength(3),maxLength(15),isEmail);
+        const isNumberOrString = or(isNumber, isString);
+
+        const nameRule = and(isString, notEmpty,minLength(3), maxLength(10));
+        const validateUserName = (obj)=> nameRule(obj.name);
+
+        const emailRule = and(isString,isEmail);
+        const validateEmail = (obj) => emailRule(obj.email);      
+
+        const ageRule = and(isNumber,minValue(0), maxValue(100));
+        const validateAge = (obj)=> ageRule(obj.age);
+
+        const validateObj = and(validateUserName,validateEmail,validateAge);
+
+        console.log('UserName Rule ', validateUserName(obj));
+        console.log('Email Rule ', validateEmail(obj));
+        console.log('Age Rule ', validateAge(obj));
+        console.log('Validate User ',validateObj(obj));
+        /*
+        console.log('Min Max hello ', minMax('hel@gmail.com'));
+        console.log('Min Max he', minMax('he'));
+        console.log('Min Max hellloo', minMax('hellloo'));
+
+        
+        console.log('IsNumber or string ',isNumberOrString('Hello'));
+        console.log('IsNumber or string ',isNumberOrString(4));
+        console.log('IsNumber or string ',isNumberOrString(false));
+        
+      
+        console.log('Empty ',isEmpty(''));
+        console.log('Empty ',isEmpty('Hello'));
+        console.log('NotEmpty ',notEmpty('Hello'));
+        console.log('NotEmpty ',notEmpty(''));
+
+        console.log('isEmail some',isEmail('some'));
+        console.log('isEmail some@gmail.com',isEmail('some@gmail.com'));
+        console.log('isString ',isString('hello'));
+        console.log('isString ',isString(3));
+
+        console.log('Min Length ',minLength(4)("Hello"));
+        console.log('Min Length ',minLength(4)("TK"));
+
+        console.log('Min Value ',minValue(3)(4));
+        console.log('Min Value ',minValue(3)(2));
+
+        console.log('Max Value ',maxValue(3)(5));
+        */
+       
+        let objContainer = Container.of(obj);
+        let result = Container.of(validateObj)
+                               .ap(objContainer);
+        console.log('Result ',result.valueOf()); 
+    </script>
+</html>

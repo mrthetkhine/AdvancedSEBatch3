@@ -1,0 +1,120 @@
+<html>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ramda/0.28.0/ramda.js"></script>
+    <script>
+   
+        const Left =(value)=>({
+            value,
+            map(fn)
+            {
+                return Left.of(value);
+            },
+            flatMap(fn)
+            {
+                return value;
+            },
+            matchWith(context)
+            {
+                //console.log('Failure ',context);
+                return context.left(value);
+            },
+            valueOf()
+            {
+                return value;
+            }
+        });
+        Left.of = Left;
+
+        const Right =(value)=>({
+            value,
+            map(fn)
+            {
+                return Right.of(fn(value));
+            },
+            flatMap(fn)
+            {
+                return fn(value);
+            },
+            matchWith(context)
+            {
+                //console.log('Sucess ',context);
+                return context.right(value);
+            },
+            ap(c) //Container-value fn
+            {
+                return c.map(value);
+            } ,
+            valueOf()
+            {
+                return value;
+            }
+        });
+        Right.of = Right;
+       
+        let add = (x,y)=>x+y;
+        let obj = {
+            name : 'MTK',
+            age : 101,
+            email : 'someone@gmail.com'
+        }
+        //isEmail
+        //notEmpty
+        //minLength, maxLength
+        //min, max
+
+        const isEmpty = (x)=> (x+'') === '';
+        const not = (fn)=>x=> !fn(x);
+        const notEmpty = not(isEmpty);
+        const isEmail = (email)=> email.includes('@');
+        const isString = (str)=> typeof str === 'string';
+        const isNumber = (num)=> typeof num === 'number';
+
+        const minLength = (len)=>(str)=> isString(str) &&  str.length >= len;
+        const maxLength = (len)=>(str)=> isString(str) && str.length <= len;
+
+        const minValue = (value)=> (x)=> isNumber(x) && x >= value;
+        const maxValue = (value)=> (x)=> isNumber(x) && x <= value;
+
+        function and(...fns)
+        {
+            return function (x)
+            {
+                return fns.reduce((a,fn)=> a && fn(x), true);
+            }
+        }
+        function or(...fns)
+        {
+            return function (x)
+            {
+                return fns.reduce((a,fn)=> a || fn(x), false);
+            }
+        }
+        const minMax = and(minLength(3),maxLength(15),isEmail);
+        const isNumberOrString = or(isNumber, isString);
+
+        const nameRule = and(isString, notEmpty,minLength(3), maxLength(10));
+        const validateUserName = (obj)=> nameRule(obj.name)? Right.of(obj)
+                                                           : Left.of('Invalid UserName') ;
+
+        const emailRule = and(isString,isEmail);
+        const validateEmail = (obj) => emailRule(obj.email) ?Right.of(obj)
+                                                            :Left.of('Invalid email') ;      
+
+        const ageRule = and(isNumber,minValue(0), maxValue(100));
+        const validateAge = (obj)=> ageRule(obj.age) ? Right.of(obj)
+                                                      : Left.of('Invalid age');
+
+        //const validateObj = and(validateUserName,validateEmail,validateAge);
+
+        console.log('UserName Rule ', validateUserName(obj).valueOf());
+        console.log('Email Rule ', validateEmail(obj).valueOf());
+        console.log('Age Rule ', validateAge(obj).valueOf());
+        //console.log('Validate User ',validateObj(obj));
+        
+        // const inc = (x)=> x+1;
+        let validationResult = Right.of(obj)
+                                     .flatMap(validateUserName) //Right(Right(obj))
+                                     .flatMap(validateEmail);
+        console.log('Validate Result ',validationResult.valueOf());
+        console.log('Validate Result ',validationResult);
+    </script>
+</html>

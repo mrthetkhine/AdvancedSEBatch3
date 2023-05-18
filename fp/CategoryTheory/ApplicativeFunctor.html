@@ -6,9 +6,9 @@
             {
                 return Container.of(fn(value));
             },
-            ap(c) 
+            ap(c) //Container-value fn
             {
-                return c.map(fn => this.map(fn));
+                return c.map(value);
             } ,
             valueOf()
             {
@@ -19,19 +19,16 @@
        
         let add = (x,y)=>x+y;
         let curriedAdd = R.curry(add);
+
         console.log('Curried Add ',curriedAdd);
         console.log('Curried Add ', curriedAdd(2)(3));
-
-        let counter = Container.of(20)
-                             .map(curriedAdd);//Container(function)
-        /*
-        now counter is Functor(function)
-        */
-        console.log('Counter ',counter.valueOf());
-        const double = (x) => x * 2 ;
-        const numberContainer = Container.of(3);
-        let result = numberContainer.ap(counter);
-        console.log("Result ",result);
-        console.log("Result value",result.valueOf().valueOf());
+        
+        let count = Container.of(3)
+                            .map(curriedAdd); // (x)-> x
+                            //Container( curriedAdd(3))
+        let two = Container.of(2);
+        let result = count.ap(two);//two.map(curriedAdd(3));                
+        console.log('Count ',result.valueOf());
+      
     </script>
 </html>

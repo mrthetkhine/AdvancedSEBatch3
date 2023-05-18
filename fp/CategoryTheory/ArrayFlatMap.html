@@ -1,0 +1,10 @@
+<html>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ramda/0.28.0/ramda.js"></script>
+    <script>
+   
+        let arr = [1,2];
+        const doubleBox = (x)=> [x, x*2];
+        let result = arr.flatMap(doubleBox);
+        console.log('Result ',result);
+    </script>
+</html>
