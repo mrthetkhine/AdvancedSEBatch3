@@ -3,6 +3,7 @@
     <script>
    
         let arr = [1,2];
+        const normalDouble = (x)=> x * 2;
         const doubleBox = (x)=> [x, x*2];
         let result = arr.flatMap(doubleBox);
         console.log('Result ',result);

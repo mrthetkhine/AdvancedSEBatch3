@@ -1,0 +1,47 @@
+<html>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ramda/0.28.0/ramda.js"></script>
+    <script>
+   
+       
+
+        const Container =(value)=>({
+            value,
+            map(fn)
+            {
+                return Container.of(fn(value));
+            },
+            flatMap(fn)
+            {
+                return fn(value);
+            },
+           
+            ap(c) //Container-value fn
+            {
+                return c.map(value);
+            } ,
+            join()
+            {
+                return value;
+            },
+            val()
+            {
+                return value;
+            }
+        });
+        Container.of = Container;
+       
+        let counter = Container.of(3);
+
+        const monadicDouble = (x)=> Container.of(x*2);
+        const normal = (x) => x + 1;
+        let result = counter.map(monadicDouble) // Container(Container(6))
+                            .join()
+                            .map(normal);
+        console.log('Result ',result.val());
+
+        result = Container.of(2)
+                           .flatMap(monadicDouble);
+        console.log('Left Identity Result ',result.val(), ' ');
+
+    </script>
+</html>

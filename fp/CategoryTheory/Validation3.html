@@ -17,6 +17,13 @@
                 //console.log('Failure ',context);
                 return context.left(value);
             },
+            and(another)
+            {
+                return another.matchWith({
+                    left:(x)=>Left.of(value+' ,'+x),
+                    right:(x)=> Left.of(value),
+                }); 
+            },
             valueOf()
             {
                 return value;
@@ -39,6 +46,13 @@
                 //console.log('Sucess ',context);
                 return context.right(value);
             },
+            and(another)
+            {
+                return another.matchWith({
+                    left:(x)=>Left.of(x),
+                    right:(x)=> Right.of(x)
+                });
+            },
             ap(c) //Container-value fn
             {
                 return c.map(value);
@@ -51,11 +65,7 @@
         Right.of = Right;
        
         let add = (x,y)=>x+y;
-        let obj = {
-            name : 'MTK',
-            age : 30,
-            email : 'someonegmail.com'
-        }
+        
         //isEmail
         //notEmpty
         //minLength, maxLength
@@ -111,11 +121,36 @@
         //console.log('Validate User ',validateObj(obj));
         
         // const inc = (x)=> x+1;
-        let validationResult = Right.of(obj)
-                                     .flatMap(validateUserName) //Right(Right(obj))
-                                     .flatMap(validateEmail)//Left
-                                     .flatMap(validateAge);
-        console.log('Validate Result ',validationResult.valueOf());
-        console.log('Validate Result ',validationResult);
+        function chain(...fns)
+        {
+            return function (x)
+            {
+                return fns.reduce( (previous,next)=>{
+                    //console.log('Previous ',previous.valueOf());
+                    //console.log('Next ',next(x));
+                    //console.log('X ',x);
+                    return previous.and(next(x));
+                } , Right.of(x));
+            }
+        }
+        let obj = {
+            name : 'MK3',
+            age : 30,
+            email : 'someone@gmail.com'
+        }
+        /*
+        console.log('ValidateUserName ',validateUserName(obj));
+        console.log('validateEmail ',validateEmail(obj));
+        console.log('validateAge ',validateAge(obj));
+        */
+        const validate = chain(validateUserName,validateEmail,validateAge);
+        let validationResult = validate(obj);
+        
+        //console.log('Validate Result ',validationResult.valueOf());
+        //console.log('Validate Result ',validationResult);
+        validationResult.matchWith({
+            left : (x)=> console.log('Vaidation failed ',x.valueOf()),
+            right : (x)=> console.log('Valid Save to DB ',x)
+        });
     </script>
 </html>
