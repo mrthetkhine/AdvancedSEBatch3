@@ -1,0 +1,27 @@
+<html>
+<script src="https://cdn.jsdelivr.net/npm/ramda@0.27.1/dist/ramda.min.js"></script>
+<script>
+    let obj = {
+        name  :"TK",
+        age : 38,
+        address : {
+            city: "Ygn",
+            township:"Somewhere"
+        }
+    };
+
+    let prop = (propName)=>(obj) => obj[propName];
+    console.log("Prop ",prop("age")(obj));
+
+    let assoc = (propName)=> value => obj => ({
+        ...obj,
+        [propName]: value,
+    });
+    let clone = assoc("age")(39)(obj);
+    console.log('Clone ',clone);
+    console.log('Obj ',obj );
+    console.log('Obj ',obj === clone);
+    
+</script>
+
+</html>
