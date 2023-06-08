@@ -1,4 +1,12 @@
+com/turing/advancedse3/tdd/LogString.class
+com/turing/advancedse3/tdd/MockitoTest.class
+com/turing/advancedse3/tdd/Computer.class
+com/turing/advancedse3/tdd/FullFile.class
+com/turing/advancedse3/tdd/CrashTestDummy.class
+com/turing/advancedse3/tdd/ExplanatoryTest.class
+com/turing/advancedse3/tdd/TextFixture.class
 com/turing/advancedse3/tdd/StackTest.class
+com/turing/advancedse3/tdd/SelfShuntTest.class
+com/turing/advancedse3/tdd/HardDisk.class
 com/turing/advancedse3/AppTest.class
 com/turing/advancedse3/tdd/solid/CarTest.class
-com/turing/advancedse3/tdd/ExplanatoryTest.class
