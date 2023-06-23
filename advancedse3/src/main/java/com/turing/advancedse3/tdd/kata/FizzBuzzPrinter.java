@@ -27,28 +27,31 @@ class Rule
 }
 public class FizzBuzzPrinter {
 	List<Rule> rules;
+	String data = "";
 	FizzBuzzPrinter(List<Rule> rules)
 	{
 		this.rules = rules;
 	}
 	
+	boolean getData(int i)
+	{
+		boolean ruleFire = false;
+		for(Rule rule : this.rules)
+		{
+			if(rule.fun.predicate(i))
+			{
+				data += rule.data;
+				ruleFire = true;
+				break;
+			}
+		}
+		return ruleFire;
+	}
 	public String print()
 	{
-		String data = "";
-		
 		for(int i=1;i<=100;i++)
-		{
-			boolean ruleFire = false;
-			for(Rule rule : this.rules)
-			{
-				if(rule.fun.predicate(i))
-				{
-					data += rule.data;
-					ruleFire = true;
-					break;
-				}
-			}
-			if(!ruleFire)
+		{	
+			if(!getData(i))
 			{
 				data += (i+"\n");
 			}
